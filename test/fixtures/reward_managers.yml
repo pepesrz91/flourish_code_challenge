@@ -3,7 +3,9 @@
 one:
   points: 1
   login_streak: 1
+  user_id: 1
 
 two:
   points: 1
   login_streak: 1
+  user_id: 2
