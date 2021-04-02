@@ -16,7 +16,7 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "It should have a login token with auth helper" do
-    credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
+    @credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
     assert_not credentials.nil?
   end
 
@@ -27,6 +27,6 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Should get to user events if authorized" do
-
+    params =
   end
 end
