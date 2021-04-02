@@ -10,5 +10,8 @@ bank = Bank.new("Coolest Bank Ever")
 bank.save
 
 
-reward
-user1 = User.new(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id, )
+
+user1 = User.new(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id)
+user1.save
+
+user
