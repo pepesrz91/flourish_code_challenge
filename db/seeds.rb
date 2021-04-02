@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+bank = Bank.new("Coolest Bank Ever")
+bank.save
+
+
+reward
+user1 = User.new(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id, )
