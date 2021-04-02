@@ -3,7 +3,9 @@
 one:
   name: MyString
   price: MyString
+  bank_id: 1
 
 two:
   name: MyString
   price: MyString
+  bank_id: 2

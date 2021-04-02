@@ -4,8 +4,10 @@ one:
   username: MyString
   password_digest: MyString
   name: MyString
+  bank_id: 1
 
 two:
   username: MyString
   password_digest: MyString
   name: MyString
+  bank_id: 2

@@ -2,6 +2,8 @@
 
 one:
   last_login: 2021-04-02 15:52:15
+  user_id: 1
 
 two:
   last_login: 2021-04-02 15:52:15
+  user_id: 2

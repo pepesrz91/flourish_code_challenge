@@ -6,12 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-bank = Bank.new("Coolest Bank Ever")
+bank = Bank.create(name:"Coolest Bank Ever")
 bank.save
 
 
 
-user1 = User.new(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id)
+user1 = User.create(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id, username:"pepesrz")
 user1.save
+user1_reward_manager = RewardManager.create(user_id:user1.id)
+user1_reward_manager.save
 
-user
+user2 = User.create(name:"Pedro", password:"CoolestPassword", bank_id:bank.id, username:"pedro2021")
+user2.save
+user2_reward_manager = RewardManager.create(user_id:user2.id)
+user2_reward_manager.save
+
+user3 = User.create(name:"Jessica", password:"CoolestPassword", bank_id:bank.id, username:"jessica2021")
+user3.save
+user3_reward_manager = RewardManager.create(user_id:user3.id)
+user3_reward_manager.save
