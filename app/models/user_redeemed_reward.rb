@@ -1,0 +1,2 @@
+class UserRedeemedReward < ApplicationRecord
+end

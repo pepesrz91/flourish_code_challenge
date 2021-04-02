@@ -1,9 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  last_login: 2021-04-02 15:41:59
-  user: one
+  last_login: 2021-04-02 15:52:15
 
 two:
-  last_login: 2021-04-02 15:41:59
-  user: two
+  last_login: 2021-04-02 15:52:15
