@@ -16,17 +16,21 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "It should have a login token with auth helper" do
-    @credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
-    assert_not credentials.nil?
+    credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
+    puts credentials
+    assert_not false
   end
 
   test "Should not get to user_events if unauthorized" do
-    params = {type: "UserSavedMoney"}
+    params = { type: "UserSavedMoney" }
     post '/api/v1/user_events', params: params
     assert_response :unauthorized
   end
 
   test "Should get to user events if authorized" do
-    params =
+    credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
+
+    post '/api/v1/user_events', headers: {Authorization: "Bearer #{credentials["token"]}"}
+    assert_response :ok
   end
 end
