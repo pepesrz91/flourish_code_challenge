@@ -1,5 +1,5 @@
 
-class EventConstants
+class EventStore
   # ...
   @@user_authenticated = 'UserAuthenticated'
   @@user_paid_bill = 'UserPaidBill'

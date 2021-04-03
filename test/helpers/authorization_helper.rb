@@ -1,5 +1,4 @@
 module AuthorizationHelper
-
   def login_helper(user)
     post '/login',
          params: { username: user[:username], password: user[:password] },
