@@ -9,14 +9,14 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
   include AuthorizationHelper
 
   def setup
-    test_bank = Bank.create(name:"Coolest Bank")
+    test_bank = Bank.create(name: "Coolest Bank")
     test_bank.save
-    test_user = User.create(name:"Pepe", username:"pepesrz", password:"SuperSecurePassword", bank_id:test_bank.id)
+    test_user = User.create(name: "Pepe", username: "pepesrz", password: "SuperSecurePassword", bank_id: test_bank.id)
     test_user.save
   end
 
   test "It should have a login token with auth helper" do
-    credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
+    credentials = login_helper(username: "pepesrz", password: "SuperSecurePassword")
     puts credentials
     assert_not false
   end
@@ -27,10 +27,17 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
   end
 
-  test "Should get to user events if authorized" do
-    credentials = login_helper(username:"pepesrz", password:"SuperSecurePassword")
+  test "It return error if wrong event type" do
+    credentials = login_helper(username: "pepesrz", password: "SuperSecurePassword")
 
-    post '/api/v1/user_events', headers: {Authorization: "Bearer #{credentials["token"]}"}
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: { event: "Wrong" }
+    assert_response :bad_request
+  end
+
+  test "Should get to user events if authorized" do
+    credentials = login_helper(username: "pepesrz", password: "SuperSecurePassword")
+
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }
     assert_response :ok
   end
 end
