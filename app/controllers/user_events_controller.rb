@@ -5,7 +5,12 @@ class UserEventsController < ApplicationController
   before_action :authorized
 
   def event_handler
-    return render json: { data: { message: "Wrong Event Type" } }, status: :bad_request unless event_params.key?(:type)
+
+    unless event_params.key?(:type)
+      return render json: { data: { message: "Event type cannot be empty" } },
+                    status: :bad_request
+    end
+
     case event_params[:type]
     when EventStore.user_paid_bill
       data = user_paid_bill
@@ -22,7 +27,7 @@ class UserEventsController < ApplicationController
   private
 
   def event_params
-    params.permit(:type, :timestamp)
+    params.permit(:type, :amount)
   end
 
   def user_authenticated
@@ -33,8 +38,8 @@ class UserEventsController < ApplicationController
   end
 
   def user_paid_bill
-
+    EventStore.user_paid_bill_event(@user.id, Float(event_params[:amount]))
   end
-  
+
   def user_made_deposit_savings; end
 end
