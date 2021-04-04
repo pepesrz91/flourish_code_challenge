@@ -17,6 +17,6 @@ class EventStoreTest < ActionDispatch::IntegrationTest
 
   test 'It should not return a session' do
     session = EventStore.get_event_session(Time.now, Date.yesterday, "wrong id")
-    assert session.record.empty?
+    assert session.records.empty?
   end
 end

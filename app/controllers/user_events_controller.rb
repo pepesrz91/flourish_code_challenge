@@ -11,7 +11,7 @@ class UserEventsController < ApplicationController
     case event_params[:type]
     when EventStore.user_paid_bill
     when EventStore.user_authenticated
-      user_authenticated_event
+      user_authenticated
     when EventStore.user_made_deposit_into_savings_account
 
     else
@@ -26,26 +26,10 @@ class UserEventsController < ApplicationController
     params.permit(:type, :timestamp)
   end
 
-  def user_authenticated_event
-    reward_manager = RewardManager.find_by_user_id(@user.id)
-    now = Time.now.utc
+  def user_authenticated
     login_yesterday = EventStore.get_event_session(1.day.ago, Date.yesterday.end_of_day, @user.id)
     login_today = EventStore.get_event_session(Date.today.beginning_of_day, Date.today.end_of_day, @user.id)
 
-    if login_yesterday.records.empty? && login_today.records.empty?
-      reward_manager.login_streak = 1
-      reward_manager.save
-      SessionStore.update({ user_id: @user.id, last_login: now, created_at: now, updated_at: now })
-    elsif login_today.empty? && !login_yesterday.empty?
-      if reward_manager.login_streak == 6
-        reward_manager.points += PointStore.seven_day_strike
-        reward_manager.login_streak = 0
-      else
-        reward_manager.login_streak += 1;
-      end
-      reward_manager.save
-    else
-      return
+    result = EventStore.user_authenticated_event(@user.id, login_yesterday, login_today)
     end
-  end
 end
