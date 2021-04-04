@@ -1,5 +1,6 @@
 require "test_helper"
 require_relative '../helpers/authorization_helper'
+require "event_store"
 
 class UserEventsControllerTest < ActionDispatch::IntegrationTest
 
@@ -10,6 +11,8 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
     test_bank.save
     test_user = User.create(name: "Pepe", username: "pepesrz", password: "SuperSecurePassword", bank_id: test_bank.id)
     test_user.save
+    reward_manager = RewardManager.create(points: 0, login_streak: 0, user_id: test_user.id)
+    reward_manager.save
   end
 
   test "It should have a login token with auth helper" do
@@ -33,8 +36,12 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
 
   test "Should get to user events if authorized" do
     credentials = login_helper(username: "pepesrz", password: "SuperSecurePassword")
-
-    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }
+    now = Time.now.utc
+    params = {
+      timestamp: now,
+      type: EventStore.user_authenticated
+    }
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params
     assert_response :ok
   end
 end
