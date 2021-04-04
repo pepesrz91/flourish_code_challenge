@@ -38,8 +38,9 @@ class EventStore
       operator = amount / 10
       reward_manager.points += operator * point_store.paid_bill_points
       reward_manager.save
-      { reward_manager: reward_manager, message: "Amount" }
+      { reward_manager: reward_manager, message: "UserPaidBill event processed correctly" }
     end
   end
+
 end
 

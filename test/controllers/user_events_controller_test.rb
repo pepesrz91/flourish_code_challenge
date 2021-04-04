@@ -89,7 +89,6 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
          as: :json
 
     assert_response :ok
-    puts JSON.parse(response.body)
     assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 700
   end
 

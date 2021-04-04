@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_220602) do
 
   create_table "rewards", force: :cascade do |t|
     t.string "name"
-    t.string "price"
+    t.integer "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "bank_id", null: false

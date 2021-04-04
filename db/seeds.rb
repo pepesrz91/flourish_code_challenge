@@ -6,22 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-bank = Bank.create(name:"Coolest Bank Ever")
+bank = Bank.create(name: "Coolest Bank Ever")
 bank.save
 
+reward1 = Reward.create(name: "2 Movie Tickets", price: 1500, bank_id: bank.id)
+reward1.save
 
+reward2 = Reward.create(name: "Free Massage", price: 1000, bank_id: bank.id)
+reward2.save
 
-user1 = User.create(name:"Jose", password:"SuperSecurePassword", bank_id: bank.id, username:"pepesrz")
+user1 = User.create(name: "Jose", password: "SuperSecurePassword", bank_id: bank.id, username: "pepesrz")
 user1.save
-user1_reward_manager = RewardManager.create(user_id:user1.id)
+user1_reward_manager = RewardManager.create(user_id: user1.id, points: 0, login_streak: 0)
 user1_reward_manager.save
 
-user2 = User.create(name:"Pedro", password:"CoolestPassword", bank_id:bank.id, username:"pedro2021")
+user2 = User.create(name: "Pedro", password: "CoolestPassword", bank_id: bank.id, username: "pedro2021")
 user2.save
-user2_reward_manager = RewardManager.create(user_id:user2.id)
+user2_reward_manager = RewardManager.create(user_id: user2.id, points: 0, login_streak: 0)
 user2_reward_manager.save
 
-user3 = User.create(name:"Jessica", password:"CoolestPassword", bank_id:bank.id, username:"jessica2021")
+user3 = User.create(name: "Jessica", password: "CoolestPassword", bank_id: bank.id, username: "jessica2021")
 user3.save
-user3_reward_manager = RewardManager.create(user_id:user3.id)
+user3_reward_manager = RewardManager.create(user_id: user3.id, points: 0, login_streak: 0)
 user3_reward_manager.save
