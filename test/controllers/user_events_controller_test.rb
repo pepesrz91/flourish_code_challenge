@@ -65,9 +65,21 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
       amount: 100
     }
     post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
-                                as: :json
+         as: :json
     assert_response :ok
     assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 500
+  end
+
+  test 'User should have 700 points after paying 100 and then 40' do
+    credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
+    params = {
+      type: EventStore.user_paid_bill,
+      amount: 40
+    }
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
+         as: :json
+    assert_response :ok
+    assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 700
   end
 
 end
