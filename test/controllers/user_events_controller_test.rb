@@ -39,7 +39,7 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
       type: EventStore.user_authenticated
     }
     post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
-                                as: :json
+         as: :json
     assert_response :ok
     assert_not JSON.parse(response.body)['data'].empty?
   end
@@ -51,7 +51,7 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
       amount: 0
     }
     post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
-                                as: :json
+         as: :json
     assert_response :ok
 
     assert JSON.parse(response.body)["data"]['message'] == 'Amount not enough'
@@ -74,11 +74,22 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
     credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
     params = {
       type: EventStore.user_paid_bill,
-      amount: 40
+      amount: 100
     }
     post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
          as: :json
     assert_response :ok
+    assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 500
+
+    params = {
+      type: EventStore.user_paid_bill,
+      amount: 40
+    }
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
+         as: :json
+
+    assert_response :ok
+    puts JSON.parse(response.body)
     assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 700
   end
 
