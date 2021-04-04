@@ -1,4 +1,3 @@
-
 class EventStore
   # ...
   @@user_authenticated = 'UserAuthenticated'
@@ -29,6 +28,7 @@ class EventStore
     else
       "User already logged in"
     end
+    { rewards: reward_manager, message: "UserAuthenticated event handled successfully" }
   end
 end
 
