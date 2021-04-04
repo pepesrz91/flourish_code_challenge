@@ -17,7 +17,6 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
 
   test "It should have a login token with auth helper" do
     credentials = login_helper(username: "pepesrz", password: "SuperSecurePassword")
-    puts credentials
     assert_not false
   end
 

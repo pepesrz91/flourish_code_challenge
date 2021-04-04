@@ -6,14 +6,13 @@ class UserEventsController < ApplicationController
 
   def event_handler
     return render json: { data: { message: "Wrong Event Type" } }, status: :bad_request unless event_params.key?(:type)
-
-    puts EventStore.user_authenticated
     case event_params[:type]
     when EventStore.user_paid_bill
+      user_paid_bill
     when EventStore.user_authenticated
       user_authenticated
     when EventStore.user_made_deposit_into_savings_account
-
+      user_made_deposit_savings
     else
       return render json: { data: { message: "Invalid event type" } }, status: :bad_request
     end
@@ -30,6 +29,10 @@ class UserEventsController < ApplicationController
     login_yesterday = EventStore.get_event_session(1.day.ago, Date.yesterday.end_of_day, @user.id)
     login_today = EventStore.get_event_session(Date.today.beginning_of_day, Date.today.end_of_day, @user.id)
 
-    result = EventStore.user_authenticated_event(@user.id, login_yesterday, login_today)
-    end
+    EventStore.user_authenticated_event(@user.id, login_yesterday, login_today)
+  end
+
+  def user_paid_bill; end
+  
+  def user_made_deposit_savings; end
 end
