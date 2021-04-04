@@ -2,9 +2,6 @@ require "test_helper"
 require_relative '../helpers/authorization_helper'
 
 class UserEventsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
 
   include AuthorizationHelper
 

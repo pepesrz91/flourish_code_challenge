@@ -4,7 +4,6 @@ class UserEventsController < ApplicationController
   before_action :authorized
 
   def event_handler
-
     return render json: { data: { message: "Wrong Event Type" } }, status: :bad_request unless event_params.key?(:type)
 
     puts EventStore.user_authenticated
@@ -22,10 +21,16 @@ class UserEventsController < ApplicationController
     render json: { data: { message: "Event handled correctly" } }, status: :ok
   end
 
+  private
+
+  def event_params
+    params.permit(:type)
+  end
+
   def user_authenticated_event
     reward_manager = RewardManager.find_by_user_id(@user.id)
 
-    now = Date.today
+    now = Time.now.utc
     start_yesterday = 1.day.ago
     end_yesterday = Date.yesterday.end_of_day
     start_today = Date.today.beginning_of_day
@@ -41,6 +46,7 @@ class UserEventsController < ApplicationController
     elsif login_today.empty? && !login_yesterday.empty?
       if reward_manager.login_streak == 6
         reward_manager.points += 1000
+        reward_manager.login_streak = 0
       else
         reward_manager.login_streak += 1;
       end
@@ -48,15 +54,5 @@ class UserEventsController < ApplicationController
     else
       return
     end
-    # puts "Sessions was found", login_yesterday
-    puts "Yesterday startec #{start_yesterday} and ended #{end_yesterday} sessions founv #{login_yesterday}"
-
-    # session = SessionStore.create(use)
-  end
-
-  private
-
-  def event_params
-    params.permit(:type)
   end
 end
