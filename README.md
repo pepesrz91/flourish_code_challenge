@@ -1,3 +1,4 @@
+
 # README
 
 ## Flourish Reward Engine Code Challenge
@@ -24,7 +25,7 @@ $  rake db:create && rake db:migrate && rake db:seed
 ```bash
 $ rails test
 ```
-![image](https://www.dropbox.com/s/i18zkwx57oz3l1y/Computer%20Science%20%281%29%20%281%29.jpg?dl=0)
+![Computer Science (1) (1)](https://user-images.githubusercontent.com/19577959/113541152-4551d500-95a7-11eb-8e36-a7cc2544c089.jpg)
 
 
 * ...
