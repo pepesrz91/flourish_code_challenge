@@ -9,8 +9,8 @@ class RewardControllerTest < ActionDispatch::IntegrationTest
     test_bank = Bank.create(name: 'Coolest Bank')
     test_bank.save
 
-    reward1 = Reward.create(name: "2 Movie Tickets", price: 1500, bank_id: test_bank.id)
-    reward1.save
+    @reward1 = Reward.create(name: "2 Movie Tickets", price: 1500, bank_id: test_bank.id)
+    @reward1.save
     reward2 = Reward.create(name: "Free Massage", price: 1000, bank_id: test_bank.id)
     reward2.save
 
@@ -31,5 +31,15 @@ class RewardControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
     rewards = JSON.parse(response.body)["available_rewards"]
     assert rewards.count >= 2
+  end
+  test "It should reedem a reward correctly" do
+    credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
+    params ={
+      reward_id: @reward1.id
+    }
+    post '/api/v1/user/redeems/', headers: { Authorization: "Bearer #{credentials["token"]}" }, params:params
+    assert_response :created
+    rewards = JSON.parse(response.body)
+    assert_not rewards["user_redeemed_reward"].nil?
   end
 end
