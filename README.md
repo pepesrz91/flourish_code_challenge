@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Flourish Reward Engine Code Challenge
 
-Things you may want to cover:
+To properly run the project, please double check that you have the following versions installed:
 
-* Ruby version
+Ruby: 3.0.0
+Rails: 6.1.3
+Bundle: 2.2.13
 
-* System dependencies
+#### Run the following commands to install the project libraries correctly:
 
-* Configuration
+```bash
+$ bundle install && bundle update
+```
+#### Run the following commands to seed the data base for development
+```bash
+$  rake db:create && rake db:migrate && rake db:seed
+```
 
-* Database creation
+#### If proyect was set up correctly the following command should run passing tests
+```bash
+$ rails test
+```
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
 
 * ...
