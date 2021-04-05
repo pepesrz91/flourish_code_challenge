@@ -69,8 +69,7 @@ The endpoint will response with the following:
 ```
 **IMPORTANT: You must use the return token in Authentication on the request headers for the following enpoints**
 
-Add the <mark>token</mark> string and send in Authentication Header prefixed with <marker>Bearer</marker> followed by a space
-like the following example:
+Add the token string prefixed with **Bearer** in the Authorization header like the following example:
 
 ```json
 {
@@ -80,7 +79,7 @@ like the following example:
 
 ### POST /api/v1/user_events
 
-This is the main endpoint it will respond to the following events
+This is the main endpoint. it will respond to the following events:
 * UserAuthenticated
 * UserPaidBill
 * UserMadeDepositIntoSavingsAccount
@@ -94,7 +93,7 @@ The body that the endpoint expects is the following:
 ```
 **Notice: **amount** is required only in UserPaidBill and UserMadeDepositIntoSavingsAccount** 
 
-The response of each event will return the reward_manager record which is responsible of managing the user's points, 
+The response of each event will return the **reward_manager** record which is responsible of managing the user's points, 
 streaks and badges.
 
 The response will look something like the following:
@@ -116,7 +115,7 @@ The response will look something like the following:
 ```
 ### GET /api/v1/rewards
 
-This endpoint only need the JWT token passed into Authentication header when doing the request.
+This endpoint only needs the JWT token passed into Authentication header when doing the request.
 It will return the available rewards for the authenticated user.
 
 ```json
@@ -147,9 +146,9 @@ It will return the available rewards for the authenticated user.
 ```
 
 ### POST /api/v1/user/redeems
-This endpoint need a reward_id property to be sent into the request to be sent into the request. 
+This endpoint needs a **reward_id** property to be sent into the request to be sent into the request. 
 With the JWT the user id is available so that is the reason a /api/v1/:user_id/reedems was not used, but it could be the case
-or the expected functionality to use that endpoint to redeem a user reward in a more agnositc matter. 
+or the expected functionality to use that endpoint to redeem a user reward in a more agnostic matter. 
 
 ```json
 {
