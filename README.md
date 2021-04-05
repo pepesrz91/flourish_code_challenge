@@ -38,12 +38,12 @@ the following diagram shows each of the table attributes and relationships that 
 The application is available at Heroku in the following link:
 https://cherry-crumble-54213.herokuapp.com/
 
-### Endpoints
+# Endpoints
 
 To try out the enpoints in an easier matter consider using [Postman](https://www.postman.com/).
 The application has the following endpoints available:
 
-<mark>POST https://cherry-crumble-54213.herokuapp.com/login </mark>
+### POST https://cherry-crumble-54213.herokuapp.com/login </mark>
 
 To use this endpoint please send the following object in JSON body
 ```json
@@ -54,16 +54,18 @@ To use this endpoint please send the following object in JSON body
 ```
 The endpoint will response with the following:
 ```json
-"user": {
-        "id": 1,
-        "username": "dummyuser",
-        "password_digest": "$2a$12$K87l3m9wCul8n0P0GyZtjuYcJYe9WlM1xDEGSLzbpWfdJRBUjm1Xe",
-        "name": "Dummy",
-        "created_at": "2021-04-05T03:36:27.835Z",
-        "updated_at": "2021-04-05T03:36:27.835Z",
-        "bank_id": 1
-    },
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.xgqa8Ok2teY00lQnlMCUgz2qv0J5uwNR4HpY_se9Pi8"
+{
+  "user": {
+    "id": 1,
+    "username": "dummyuser",
+    "password_digest": "$2a$12$K87l3m9wCul8n0P0GyZtjuYcJYe9WlM1xDEGSLzbpWfdJRBUjm1Xe",
+    "name": "Dummy",
+    "created_at": "2021-04-05T03:36:27.835Z",
+    "updated_at": "2021-04-05T03:36:27.835Z",
+    "bank_id": 1
+  },
+  "token": "eyJhbGciOiJIUzI1NiJ9.....z2qv0J5uwNR4HpY_se9Pi8"
+}
 ```
 **IMPORTANT: You must use the return token in Authentication on the request headers for the following enpoints**
 
@@ -90,7 +92,7 @@ The body that the endpoint expects is the following:
   "amount": 300
 }
 ```
-**Notice: # required only in UserPailBill and UserMadeDepositIntoSavingsAccount** 
+**Notice: **amount** is required only in UserPailBill and UserMadeDepositIntoSavingsAccount** 
 
 The response of each event will return the reward_manager record which is responsible of managing the user's points, 
 streaks and badges.
