@@ -33,7 +33,7 @@ the following diagram shows each of the table attributes and relationships that 
 ![Computer Science (1) (1)](https://user-images.githubusercontent.com/19577959/113541152-4551d500-95a7-11eb-8e36-a7cc2544c089.jpg)
 
 
-## Heroku
+# Heroku
 
 The application is available at Heroku in the following link:
 https://cherry-crumble-54213.herokuapp.com/
@@ -191,7 +191,7 @@ The response will be the following:
   
 
   
-## available users with passwords
+## Available users with passwords
 
 #### User 1
 username: dummyuser
