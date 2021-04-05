@@ -29,7 +29,7 @@ class RewardControllerTest < ActionDispatch::IntegrationTest
     credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
     get '/api/v1/rewards', headers: { Authorization: "Bearer #{credentials["token"]}" }
     assert_response :ok
-    rewards = JSON.parse(response.body)["available_rewards"]
+    rewards = JSON.parse(response.body)["data"]["available_rewards"]
     assert rewards.count >= 2
   end
   test "It should reedem a reward correctly" do
