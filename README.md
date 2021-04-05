@@ -191,7 +191,7 @@ The response will be the following:
   
 
   
-### available users with password:
+## available users with passwords
 
 #### User 1
 username: dummyuser
