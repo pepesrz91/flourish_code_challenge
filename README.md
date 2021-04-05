@@ -26,6 +26,11 @@ $  rake db:create && rake db:migrate && rake db:seed
 $ rails test
 ```
 
+#### Starting up server
+```bash
+$ rails server
+```
+
 ## Relational Database Diagram
 
 the following diagram shows each of the table attributes and relationships that were used in the API Models
