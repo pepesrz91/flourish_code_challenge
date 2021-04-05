@@ -40,7 +40,7 @@ class RewardControllerTest < ActionDispatch::IntegrationTest
     post '/api/v1/user/redeems/', headers: { Authorization: "Bearer #{credentials["token"]}" }, params:params
     assert_response :created
     rewards = JSON.parse(response.body)
-    assert_not rewards["user_redeemed_reward"].nil?
+    assert_not rewards["data"]["user_redeemed_reward"].nil?
   end
   test "It should not redeem a second a reward" do
     credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
@@ -50,7 +50,7 @@ class RewardControllerTest < ActionDispatch::IntegrationTest
     post '/api/v1/user/redeems/', headers: { Authorization: "Bearer #{credentials["token"]}" }, params:params
     assert_response :created
     rewards = JSON.parse(response.body)
-    assert_not rewards["user_redeemed_reward"].nil?
+    assert_not rewards["data"]["user_redeemed_reward"].nil?
 
     params ={
       reward_id: @reward1.id

@@ -43,7 +43,7 @@ https://cherry-crumble-54213.herokuapp.com/
 To try out the enpoints in an easier matter consider using [Postman](https://www.postman.com/).
 The application has the following endpoints available:
 
-### POST https://cherry-crumble-54213.herokuapp.com/login </mark>
+### POST /login 
 
 To use this endpoint please send the following object in JSON body
 ```json
@@ -78,7 +78,7 @@ like the following example:
 }
 ```
 
-### POST https://cherry-crumble-54213.herokuapp.com/api/v1/user_events
+### POST api/v1/user_events
 
 This is the main endpoint it will respond to the following events
 * UserAuthenticated
@@ -92,7 +92,7 @@ The body that the endpoint expects is the following:
   "amount": 300
 }
 ```
-**Notice: **amount** is required only in UserPailBill and UserMadeDepositIntoSavingsAccount** 
+**Notice: **amount** is required only in UserPaidBill and UserMadeDepositIntoSavingsAccount** 
 
 The response of each event will return the reward_manager record which is responsible of managing the user's points, 
 streaks and badges.
@@ -114,4 +114,49 @@ The response will look something like the following:
     }
 }
 ```
+GET /api/v1/rewards
 
+This endpoint only need the JWT token passed into Authentication header when doing the request.
+It will return the available rewards for the authenticated user.
+
+```json
+{
+"data":{
+    "message":"Available rewards",
+    "available_rewards":[
+        {
+        "id":1,
+        "name":"2 Movie Tickets",
+        "price":1500,
+        "created_at":"2021-04-05T03:36:27.172Z",
+        "updated_at":"2021-04-05T03:36:27.172Z",
+        "bank_id":1
+        },
+        {
+        "id":2,
+        "name":"Free Massage",
+        "price":1000,
+        "created_at":"2021-04-05T03:36:27.212Z",
+        "updated_at":"2021-04-05T03:36:27.212Z",
+        "bank_id":1
+        }
+      ]
+    }
+}
+
+```
+
+GET /api/v1/user/redeems
+This endpoint need a reward_id property to be sent into the request to be sent into the request. 
+With the JWT the user id is available so that is the reason a /api/v1/:user_id/reedems was not used, but it could be the case
+or the expected functionality to use that endpoint to redeem a user reward in a more agnositc matter. 
+
+```json
+{
+  "reward_id": 1
+}
+```
+
+## Other Notes
+TDD was used during the entire project, there is still various tests that can be applied.
+JWT approach was used 

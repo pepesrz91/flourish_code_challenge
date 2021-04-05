@@ -19,8 +19,8 @@ class RewardController < ApplicationController
       return render json: { data: { message: "Cannot redeem reward, user doesn't have enough points" } },
                     status: :bad_request
     end
-    render json: { data: { message: "Reward redeemed!" },
-                   reward_manager: reward_manager, user_redeemed_reward: selected_reward }, status: :created
+    render json: { data: { message: "Reward redeemed!",
+                           reward_manager: reward_manager, user_redeemed_reward: selected_reward } }, status: :created
   end
 
   def reward_params

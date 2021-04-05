@@ -12,7 +12,6 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        # Todo: KEY SHOULD AS ENVIRONMENT VARIABLE
         JWT.decode(token, JWT_KEY, true, algorithm: 'HS256') #
       rescue JWT::DecodeError
         nil
