@@ -1,5 +1,6 @@
 require 'event_store'
 require 'point_store'
+require './lib/api_fake'
 
 class UserEventsController < ApplicationController
   before_action :authorized
@@ -19,7 +20,7 @@ class UserEventsController < ApplicationController
     when EventStore.user_made_deposit_into_savings_account
       data = user_made_deposit_savings
     else
-      return render json: { data: { message: "Invalid event type" } }, status: :bad_request
+      return render json: { data: { message: "Invalid event type" }, type: event_params[:type] }, status: :bad_request
     end
     render json: { data: data }, status: :ok
   end
@@ -41,5 +42,7 @@ class UserEventsController < ApplicationController
     EventStore.user_paid_bill_event(@user.id, Float(event_params[:amount]))
   end
 
-  def user_made_deposit_savings; end
+  def user_made_deposit_savings
+    EventStore.user_made_deposit_event(@user.id, Float(event_params[:amount]))
+  end
 end

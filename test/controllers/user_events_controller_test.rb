@@ -92,4 +92,16 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
     assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 700
   end
 
+  test 'It should not let user win first deposit badge' do
+    credentials = login_helper(username: 'pepesrz', password: 'SuperSecurePassword')
+    params = {
+      type: EventStore.user_made_deposit_into_savings_account,
+      amount: 100
+    }
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
+         as: :json
+    assert_response :ok
+    assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 0
+  end
+
 end

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_220602) do
   create_table "reward_managers", force: :cascade do |t|
     t.integer "points"
     t.integer "login_streak"
+    t.text "badges", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
