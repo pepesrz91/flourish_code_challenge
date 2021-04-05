@@ -186,6 +186,11 @@ The response will be the following:
 * Badges: The rule when a user saved money and received 1000 points if its current savings balance was 100 
   was transformed into a badge that can only be one once. The reason for this is that if a user made even small deposits 
   he will be winning everytime 1000 points which is probable that will cause issues with regards Flourish money.
+* The Badge mentioned above is won using a FakeApi which is declared very explicity in the code because a better approach
+  must be implemented. The FakeApi will return an array of bank accounts based if the user id is even or odd. There is
+  one test that is currently failing fue to this arbitration, just to keep note. 
+  
+
   
 ### available users with password:
 
@@ -208,3 +213,12 @@ password: CoolestPassword
 username: pepesrz
 
 password: SuperSecurePassword
+
+## Future Improvements
+
+* Integration testing.
+* Better Api mocks for development, testing and production environments.
+* For a more advanced event driven architecture an implementation of [Rails Event Store](https://railseventstore.org/)
+  would be a interesting approach for the exercise.
+* Better Ruby implementation: Some functions are a little to large with regards ruby code conventions, so doing refactor
+  will improve the readability of the code. 
