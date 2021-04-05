@@ -10,7 +10,6 @@ class RewardController < ApplicationController
   def user_redeems
     reward_manager = RewardManager.find_by_user_id(@user.id)
     selected_reward = Reward.find_by(id: reward_params[:reward_id])
-    puts selected_reward.price
     if selected_reward.price <= reward_manager.points
       redeemed_reward = UserRedeemedReward.create(user_id: @user.id, name: selected_reward[:name])
       redeemed_reward.save

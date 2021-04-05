@@ -1,6 +1,7 @@
+# APPLICATION CONTROLLER: HANDLES AUTH TOKEN TO BE AVAILABLE BETWEEN CONTROLLERS
 class ApplicationController < ActionController::API
   def encode_token(payload)
-    JWT.encode(payload, 'Bearer')
+    JWT.encode(payload, JWT_KEY)
   end
 
   def auth_header
@@ -11,8 +12,8 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, 'Bearer', true, algorithm: 'HS256')
-
+        # Todo: KEY SHOULD AS ENVIRONMENT VARIABLE
+        JWT.decode(token, JWT_KEY, true, algorithm: 'HS256') #
       rescue JWT::DecodeError
         nil
       end

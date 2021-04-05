@@ -5,8 +5,8 @@ require './lib/api_fake'
 class UserEventsController < ApplicationController
   before_action :authorized
 
+  # EVENT HANDLER, RECEIVES EVENT TYPES AND CORRESPONDING DATA
   def event_handler
-
     unless event_params.key?(:type)
       return render json: { data: { message: "Event type cannot be empty" } },
                     status: :bad_request
@@ -31,6 +31,7 @@ class UserEventsController < ApplicationController
     params.permit(:type, :amount)
   end
 
+  # USER AUTHENTICATED EVENT METHOD
   def user_authenticated
     login_yesterday = EventStore.get_event_session(1.day.ago, Date.yesterday.end_of_day, @user.id)
     login_today = EventStore.get_event_session(Date.today.beginning_of_day, Date.today.end_of_day, @user.id)
@@ -38,10 +39,12 @@ class UserEventsController < ApplicationController
     EventStore.user_authenticated_event(@user.id, login_yesterday, login_today)
   end
 
+  # USER PAID BILL EVENT METHOD
   def user_paid_bill
     EventStore.user_paid_bill_event(@user.id, Float(event_params[:amount]))
   end
 
+  # USER MADE DEPOSIT TO SAVINGS ACCOUNT EVENT METHOD
   def user_made_deposit_savings
     EventStore.user_made_deposit_event(@user.id, Float(event_params[:amount]))
   end
