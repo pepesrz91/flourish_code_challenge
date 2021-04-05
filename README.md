@@ -156,7 +156,47 @@ or the expected functionality to use that endpoint to redeem a user reward in a 
   "reward_id": 1
 }
 ```
+The response will be the following:
+```json
+"data": {
+        "message": "Reward redeemed!",
+        "reward_manager": {
+            "points": 0,
+            "id": 1,
+            "login_streak": 1,
+            "badges": [],
+            "created_at": "2021-04-05T03:36:27.921Z",
+            "updated_at": "2021-04-05T14:40:00.703Z",
+            "user_id": 1
+        },
+        "user_redeemed_reward": {
+            "id": 2,
+            "name": "Free Massage",
+            "price": 1000,
+            "created_at": "2021-04-05T03:36:27.212Z",
+            "updated_at": "2021-04-05T03:36:27.212Z",
+            "bank_id": 1
+        }
+    }
+```
 
 ## Other Notes
-TDD was used during the entire project, there is still various tests that can be applied.
-JWT approach was used 
+* TDD was used during the entire project, there is still various tests that can be applied. (There is never enough testing)
+* JWT approach was used because of the security context there must be with regards the banking system
+* Badges: The rule when a user saved money and received 1000 points if its current savings balance was 100 
+  was transformed into a badge that can only be one once. The reason for this is that if a user made even small deposits 
+  he will be winning everytime 1000 points which is probable that will cause issues with regards Flourish money.
+  
+### available users with password:
+
+username: dummyuser
+password: DummyPassword
+
+username: jessica2021
+password: CoolestPassword
+
+username: pedro2021
+password: CoolestPassword
+
+username: pepesrz
+password: SuperSecurePassword
