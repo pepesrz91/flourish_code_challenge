@@ -50,9 +50,9 @@ class EventStore
     if badges.empty?
       badge_id = "deposit_badge_1"
       result = deposit_badge_referee(amount, badge_id, user_id)
-      if result['won']
-        reward_manager.points += result['rewards']
-        reward_manager << badge_id
+      if result[:winner]
+        reward_manager.points += result[:reward]
+        reward_manager.badges.push(badge_id)
         reward_manager.save
       end
     end
@@ -66,7 +66,7 @@ class EventStore
     api = ApiFake.new
     user_balance = api.query(user_id).map { |ba| ba if ba[:type] == 'SAVINGS_ACCOUNT' }.compact[0]
     badge_rule = point_store.deposit_badges.map{ |n| n if n[:name] == badge_id}[0]
-    puts "BADGE_RULE", user_balance
+
     won = deposit_rule_checker(badge_rule[:balance_rule], badge_rule[:deposit_rule], user_balance[:balance], amount)
     { winner: won, reward: badge_rule[:reward] }
   end

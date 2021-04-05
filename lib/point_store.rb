@@ -9,7 +9,7 @@ class PointStore
     @deposit_badges = [
       {
         name: "deposit_badge_1",
-        balance_rule: 1000,
+        balance_rule: 100,
         deposit_rule: 1,
         reward: 1000
       }

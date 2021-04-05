@@ -13,6 +13,11 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
     test_user.save
     reward_manager = RewardManager.create(points: 0, login_streak: 0, user_id: test_user.id)
     reward_manager.save
+
+    test_user2 = User.create(name: 'Jose', username: 'jose2', password: 'SuperSecurePassword', bank_id: test_bank.id)
+    test_user2.save
+    reward_manager2 = RewardManager.create(points: 0, login_streak: 0, user_id: test_user2.id)
+    reward_manager2.save
   end
 
   test 'It should have a login token with auth helper' do
@@ -102,6 +107,18 @@ class UserEventsControllerTest < ActionDispatch::IntegrationTest
          as: :json
     assert_response :ok
     assert JSON.parse(response.body)["data"]["reward_manager"]['points'] == 0
+  end
+
+  test 'It let a user win the deposit badge' do
+    credentials = login_helper(username: 'jose2', password: 'SuperSecurePassword')
+    params = {
+      type: EventStore.user_made_deposit_into_savings_account,
+      amount: 100
+    }
+    post '/api/v1/user_events', headers: { Authorization: "Bearer #{credentials["token"]}" }, params: params,
+         as: :json
+    assert_response :ok
+    assert JSON.parse(response.body)["data"]["reward_manager"]['points'] <= 1000
   end
 
 end
