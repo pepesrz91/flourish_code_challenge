@@ -189,14 +189,22 @@ The response will be the following:
   
 ### available users with password:
 
+#### User 1
 username: dummyuser
+
 password: DummyPassword
 
+#### User 2
 username: jessica2021
+
 password: CoolestPassword
 
+#### User 3
 username: pedro2021
+
 password: CoolestPassword
 
+#### User 4
 username: pepesrz
+
 password: SuperSecurePassword
