@@ -25,7 +25,91 @@ $  rake db:create && rake db:migrate && rake db:seed
 ```bash
 $ rails test
 ```
+
+## Relational Database Diagram
+
+the following diagram shows each of the table attributes and relationships that were used in the API Models
+
 ![Computer Science (1) (1)](https://user-images.githubusercontent.com/19577959/113541152-4551d500-95a7-11eb-8e36-a7cc2544c089.jpg)
 
 
-* ...
+## Heroku
+
+The application is available at Heroku in the following link:
+https://cherry-crumble-54213.herokuapp.com/
+
+### Endpoints
+
+To try out the enpoints in an easier matter consider using [Postman](https://www.postman.com/).
+The application has the following endpoints available:
+
+<mark>POST https://cherry-crumble-54213.herokuapp.com/login </mark>
+
+To use this endpoint please send the following object in JSON body
+```json
+{
+  "username": "dummyuser",
+  "password": "DummyPassword"
+}
+```
+The endpoint will response with the following:
+```json
+"user": {
+        "id": 1,
+        "username": "dummyuser",
+        "password_digest": "$2a$12$K87l3m9wCul8n0P0GyZtjuYcJYe9WlM1xDEGSLzbpWfdJRBUjm1Xe",
+        "name": "Dummy",
+        "created_at": "2021-04-05T03:36:27.835Z",
+        "updated_at": "2021-04-05T03:36:27.835Z",
+        "bank_id": 1
+    },
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.xgqa8Ok2teY00lQnlMCUgz2qv0J5uwNR4HpY_se9Pi8"
+```
+**IMPORTANT: You must use the return token in Authentication on the request headers for the following enpoints**
+
+Add the <mark>token</mark> string and send in Authentication Header prefixed with <marker>Bearer</marker> followed by a space
+like the following example:
+
+```json
+{
+  "Authentication" : "Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.xgqa8Ok2teY00lQnlMCUgz2qv0J5uwNR4HpY_se9Pi8"
+}
+```
+
+### POST https://cherry-crumble-54213.herokuapp.com/api/v1/user_events
+
+This is the main endpoint it will respond to the following events
+* UserAuthenticated
+* UserPaidBill
+* UserMadeDepositIntoSavingsAccount
+
+The body that the endpoint expects is the following:
+```json
+{
+  "type": "UserPaidBill", 
+  "amount": 300
+}
+```
+**Notice: # required only in UserPailBill and UserMadeDepositIntoSavingsAccount** 
+
+The response of each event will return the reward_manager record which is responsible of managing the user's points, 
+streaks and badges.
+
+The response will look something like the following:
+```json
+{
+    "data": {
+        "reward_manager": {
+            "login_streak": 1,
+            "id": 1,
+            "points": 2000,
+            "badges": [],
+            "created_at": "2021-04-05T03:36:27.921Z",
+            "updated_at": "2021-04-05T06:10:08.739Z",
+            "user_id": 1
+        },
+        "message": "UserAuthenticated event handled successfully"
+    }
+}
+```
+

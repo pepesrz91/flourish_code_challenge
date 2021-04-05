@@ -1,5 +1,3 @@
-
-
 class EventStore
   # ...
   @@user_authenticated = 'UserAuthenticated'
@@ -56,7 +54,7 @@ class EventStore
         reward_manager.save
       end
     end
-    { data: { message: 'UserMadeDepositToBankAccount event handled properly' }, reward_manager: reward_manager }
+    { message: 'UserMadeDepositToBankAccount event handled properly', reward_manager: reward_manager }
   end
 
   private
@@ -65,7 +63,7 @@ class EventStore
     point_store = PointStore.new
     api = ApiFake.new
     user_balance = api.query(user_id).map { |ba| ba if ba[:type] == 'SAVINGS_ACCOUNT' }.compact[0]
-    badge_rule = point_store.deposit_badges.map{ |n| n if n[:name] == badge_id}[0]
+    badge_rule = point_store.deposit_badges.map { |n| n if n[:name] == badge_id }[0]
 
     won = deposit_rule_checker(badge_rule[:balance_rule], badge_rule[:deposit_rule], user_balance[:balance], amount)
     { winner: won, reward: badge_rule[:reward] }

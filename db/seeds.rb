@@ -29,3 +29,8 @@ user3 = User.create(name: "Jessica", password: "CoolestPassword", bank_id: bank.
 user3.save
 user3_reward_manager = RewardManager.create(user_id: user3.id, points: 500, login_streak: 0)
 user3_reward_manager.save
+
+user4 = User.create(name: "Dummy", password: "DummyPassword", bank_id: bank.id, username: "dummyuser")
+user4.save
+user4_reward_manager = RewardManager.create(user_id: user4.id, points: 600, login_streak: 5)
+user4_reward_manager.save
