@@ -78,7 +78,7 @@ like the following example:
 }
 ```
 
-### POST api/v1/user_events
+### POST /api/v1/user_events
 
 This is the main endpoint it will respond to the following events
 * UserAuthenticated
@@ -114,7 +114,7 @@ The response will look something like the following:
     }
 }
 ```
-GET /api/v1/rewards
+### GET /api/v1/rewards
 
 This endpoint only need the JWT token passed into Authentication header when doing the request.
 It will return the available rewards for the authenticated user.
@@ -146,7 +146,7 @@ It will return the available rewards for the authenticated user.
 
 ```
 
-GET /api/v1/user/redeems
+### POST /api/v1/user/redeems
 This endpoint need a reward_id property to be sent into the request to be sent into the request. 
 With the JWT the user id is available so that is the reason a /api/v1/:user_id/reedems was not used, but it could be the case
 or the expected functionality to use that endpoint to redeem a user reward in a more agnositc matter. 
