@@ -35,8 +35,7 @@ $ rails server
 
 the following diagram shows each of the table attributes and relationships that were used in the API Models
 
-![Computer Science (1) (1)](https://user-images.githubusercontent.com/19577959/113541152-4551d500-95a7-11eb-8e36-a7cc2544c089.jpg)
-
+![Computer Science (2)](https://user-images.githubusercontent.com/19577959/113645199-0cb80700-964c-11eb-94f5-06ebdfd8cc99.jpg)
 
 # Heroku
 
