@@ -188,10 +188,10 @@ The response will be the following:
 * JWT approach was used because of the security context there must be with regards the banking system
 * Badges: The rule when a user saved money and received 1000 points if its current savings balance was over 100 
   was transformed into a badge that can only be one once. The reason behind this is that if a user makes even small deposits 
-  he will be winning everytime 1000 points, which is probable that will cause issues in the long run.
+  he will be winning everytime 1000 points, which probably cause issues in the long run.
 * The Badge mentioned above is won using a FakeApi which is declared very explicitly in the code because a better approach
   must be implemented. The FakeApi will return an array of bank accounts based if the user id is even or odd. There is
-  one test that is currently failing fue to this arbitration, just to keep note. 
+  one test that is currently failing due to this arbitration, just to keep note. 
   
 
   
